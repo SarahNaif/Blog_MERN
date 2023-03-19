@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="font-opensans">
+    <div className="font-work">
       <Routes>
         <Route index path="/" element={<HomePage />} />
       </Routes>

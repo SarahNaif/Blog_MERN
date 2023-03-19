@@ -1,9 +1,13 @@
 import Logo from "../assets/Logo.svg";
-import Search from "../assets/Search.svg"
+import HeroImage from "../assets/HeroImage.svg"
+import PostProfileImage from "../assets/PostProfileImage.jpg"
+import PostImage from "../assets/PostImage.jpg"
 
 const images = {
     Logo,
-    Search
+    HeroImage,
+    PostProfileImage,
+    PostImage,
   };
 
   export default images;
