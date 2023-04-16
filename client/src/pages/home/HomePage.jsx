@@ -1,4 +1,4 @@
-import MainLayout from "../../components/MainLayout"
+import MainLayout from "../../components/navigation/MainLayout"
 import Hero from "../../components/Hero"
 import Articles from "../../components/Articles"
 

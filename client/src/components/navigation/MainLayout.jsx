@@ -4,7 +4,7 @@ import Header from "./Header"
 const MainLayout = ({children}) => {
   return (
     <div>
-       <Header />
+       <Header logginedUserId="a"/>
       {children}
       <Footer /> 
     </div>
