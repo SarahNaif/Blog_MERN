@@ -19,7 +19,7 @@ const UserSchema = new Schema(
 // pre sava middleware : to hash user password before saving it to db 
 UserSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
-      this.password = await hash(this.password, process.env.SALT_ROUNDS);
+      this.password = await hash(this.password,parseInt(process.env.SALT_ROUNDS));
       return next();
     }
     return next();
