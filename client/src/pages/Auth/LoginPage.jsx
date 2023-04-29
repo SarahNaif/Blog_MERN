@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
+import MainLayout from "../../components/navigation/MainLayout"
 
 
 const LoginPage = () => {
   return (
-    <>
-     
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+     <MainLayout>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-10">
 
         <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
           <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">
@@ -124,7 +124,7 @@ const LoginPage = () => {
           </div>
           <div className="flex justify-center items-center mt-6">
             <Link
-              to="/signup"
+              to="/register"
               className="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
             >
               <span className="ml-2">You don't have an account?</span>
@@ -132,7 +132,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-    </>
+      </MainLayout>
   );
 }
 
