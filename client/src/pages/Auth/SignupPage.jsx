@@ -1,8 +1,41 @@
-import { Link } from "react-router-dom";
-import MainLayout from "../../components/navigation/MainLayout";
+import React, { useEffect } from "react";
+import { Link , useNavigate} from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+
+import MainLayout from "../../components/navigation/MainLayout";
+import { signup } from "../../services/index/users";
+import { userActions } from "../../store/reducers/userReducers";
 
 const SignupPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userState = useSelector((state) => state.user);
+
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ name, email, password }) => {
+      return signup({ name, email, password });
+    },
+    onSuccess: (data) => {
+      dispatch(userActions.setUserInfo(data));
+      console.log(data);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
+    },
+  });
+
+  useEffect(() => {
+    if (userState.userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userState.userInfo]);
+
+
   const {register, handleSubmit,formState: { errors, isValid }, watch }= useForm(
     {
      defaultValues:{
@@ -13,8 +46,10 @@ const SignupPage = () => {
      },
      mode:"onChange"
   })
+  
   const submitHandler = (data) => {
-
+    const { name, email, password } = data;
+    mutate({ name, email, password });
   };
 
 
@@ -43,7 +78,7 @@ const SignupPage = () => {
 
               <div className="flex flex-col mb-4">
                 <label
-                  for="name"
+                  htmlFor="name"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                 >
                   Name:
@@ -75,20 +110,20 @@ const SignupPage = () => {
                         message:"Name is required"
                       }
                     })}
-                    name="username"
+                    
                     className={`text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none  ${errors.name ?  "focus:border-red-500 border-red-500" : "focus:border-blue-400 "}`}
-                    placeholder="Name"
+                    placeholder="Enter name"
                   />
                 </div>
                 {errors.name?.message && (
-                  <p className="text-red-500 text-xs mt-1">Name is required</p>
+                  <p className="text-red-500 text-xs mt-1"> {errors.name?.message}</p>
                 )}
               </div>
 
 
               <div className="flex flex-col mb-4">
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                 >
                   E-Mail Address:
@@ -120,7 +155,7 @@ const SignupPage = () => {
                         message:"Email is required"
                       }
                     })}
-                    name="email"
+                   
                     className={`text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none  ${errors.email ? "focus:border-red-500 border-red-500" : "focus:border-blue-400 "}`}
                     placeholder="Enter email"
                   />
@@ -135,7 +170,7 @@ const SignupPage = () => {
 
               <div className="flex flex-col mb-4">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                 >
                   Password:
@@ -170,7 +205,7 @@ const SignupPage = () => {
                     message: "Password length must be at least 6 characters",
                   },
                 })}
-                    name="password"
+                   
                     className={`text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400  w-full py-2 focus:outline-none  ${errors.password ?  "focus:border-red-500 border-red-500" : "focus:border-blue-400 "}`}
                     placeholder="Password"
                   />
@@ -185,7 +220,7 @@ const SignupPage = () => {
 
               <div className="flex flex-col mb-8">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                 >
                   Confirm Password:
@@ -208,7 +243,7 @@ const SignupPage = () => {
                   </div>
 
                   <input
-                    id="password"
+                    id="confirmPassword"
                     type="password"
                     {...register("confirmPassword", {
                       required: {
@@ -221,7 +256,7 @@ const SignupPage = () => {
                         }
                       },
                     })}
-                    name="password"
+                    
                     className={`text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400  w-full py-2 focus:outline-none focus:border-blue-400 ${errors.confirmPassword?  "focus:border-red-500 border-red-500" : "focus:border-blue-400 "}`}
                     placeholder="Password"
                   />

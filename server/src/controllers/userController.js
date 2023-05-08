@@ -20,6 +20,12 @@ const registerUser = async (req, res, next) => {
   
       return res.status(201).json({
         msg: "successfully registered",
+        _id: user._id,
+        avatar: user.avatar,
+        name: user.name,
+        email: user.email,
+        verified: user.verified,
+        admin: user.admin,
         token: await user.generateJWT(),
 
       });
@@ -43,6 +49,12 @@ const loginUser = async (req, res, next) => {
       if (await user.comparePassword(password)) {
         return res.status(201).json({
           msg: "successfully logged in ",
+          _id: user._id,
+          avatar: user.avatar,
+          name: user.name,
+          email: user.email,
+          verified: user.verified,
+          admin: user.admin,
           token: await user.generateJWT(),
         });
       } else {

@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
 import HomePage from "./pages/Home/HomePage";
 import "./App.css";
 import LoginPage from "./pages/Auth/LoginPage";
@@ -22,6 +24,7 @@ function App() {
         <Route path="/new" element={<CreateArticlePage/>} />
         <Route path="/post/:id" element={<ArticleDetailPage />} />
       </Routes>
+      <Toaster/>
     </div>
   );
 }

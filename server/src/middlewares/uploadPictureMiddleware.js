@@ -1,6 +1,7 @@
 import multer from "multer";
 import path from "path";
 
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         
@@ -15,14 +16,23 @@ const storage = multer.diskStorage({
   const uploadPicture = multer({
     storage: storage,
     limits: {
-      fileSize: 1 * 1000000, 
+      fileSize: 1 * 1000000,
     },
-    fileFilter:  (req, file, cb) => {
-      let ext = path.extname(file.originalname);
-      if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg") {
-        return cb(new Error("Only images are allowed"));
+    fileFilter: (req, file, cb) => {
+      if (
+        file.mimetype === "image/png" ||
+        file.mimetype === "image/jpg" ||
+        file.mimetype === "image/jpeg"
+      ) {
+        cb(null, true);
+      } else {
+        cb(new Error("File format should be PNG,JPG,JPEG"), false); // if validation failed then generate error
       }
-      cb(null, true);
     },
   });
+
+
+
+
+
   export default  uploadPicture ;
