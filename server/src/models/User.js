@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { hash, compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
-
+import { randomBytes } from "crypto";
 
 const UserSchema = new Schema(
     {
@@ -11,6 +11,8 @@ const UserSchema = new Schema(
         password: { type: String, required: true },
         verified: { type: Boolean, default: false },
         verificationCode: { type: String, required: false },
+        resetPasswordToken: {type: String, required: false },
+        resetPasswordExpiresIn: {type: Date,required: false },
         admin: { type: Boolean, default: false },
       },
       { timestamps: true }
@@ -32,6 +34,10 @@ UserSchema.methods.generateJWT = async function () {
     });
   };
 
+  UserSchema.methods.generatePasswordReset = function () {
+    this.resetPasswordExpiresIn = Date.now() + 36000000; // password will expire in 1 hour
+    this.resetPasswordToken = randomBytes(20).toString("hex");
+  };
 
 UserSchema.methods.comparePassword = async function (enteredPassword) {
     return await compare(enteredPassword, this.password);

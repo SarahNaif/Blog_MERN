@@ -171,7 +171,7 @@ const LoginPage = () => {
               <div className="flex items-center mb-6 -mt-4">
                 <div className="flex ml-auto">
                   <Link
-                    to="/reset"
+                    to="/user/forget-password"
                     className="inline-flex text-xs sm:text-sm text-blue-500 hover:text-blue-700"
                   >
                     Forgot Your Password?

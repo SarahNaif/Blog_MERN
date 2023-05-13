@@ -10,16 +10,24 @@ import ArticlesPage from "./pages/Articles/ArticlesPage";
 import ResetEmail from "./pages/Auth/ResetEmail";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import CreateArticlePage from "./pages/Articles/CreateArticlePage";
+import ForgetPass from "./pages/Auth/ForgetPass";
 
 function App() {
   return (
     <div className="font-work">
       <Routes>
         <Route index path="/" element={<HomePage />} />
+
+        <Route path="/user/forget-password" element={<ForgetPass/>} />
+        <Route path="/user/reset-password/:resetPasswordToken" element={<ResetEmail/>} />
+
+
+
         <Route path="/articles" element={<ArticlesPage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<SignupPage/>} />
-        <Route path="/reset" element={<ResetEmail/>} />
+        
+
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/new" element={<CreateArticlePage/>} />
         <Route path="/post/:id" element={<ArticleDetailPage />} />
