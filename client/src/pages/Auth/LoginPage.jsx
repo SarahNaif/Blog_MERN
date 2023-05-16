@@ -23,7 +23,7 @@ const LoginPage = () => {
     },
     onSuccess: (data) => {
       dispatch(userActions.setUserInfo(data));
-      console.log(data);
+      localStorage.setItem("account", JSON.stringify(data));
     },
     onError: (error) => {
       toast.error(error.message);
