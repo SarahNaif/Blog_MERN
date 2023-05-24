@@ -7,6 +7,7 @@ import {
   invalidPathHandler,
 } from "./middlewares/errorHandler.js";
 import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -24,6 +25,7 @@ app.get("/", (_req, res) => {
   });
 
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 // image static folder acess
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 
