@@ -1,6 +1,6 @@
 import MainLayout from "../../components/navigation/MainLayout"
 import Hero from "../../components/Hero"
-import Articles from "../../components/Articles"
+import Articles from "../../components/Articles/Articles"
 
 const HomePage = () => {
   return (
