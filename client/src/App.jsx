@@ -30,7 +30,7 @@ function App() {
 
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/new" element={<CreateArticlePage/>} />
-        <Route path="/post/:id" element={<ArticleDetailPage />} />
+        <Route path="/post/:slug" element={<ArticleDetailPage />} />
       </Routes>
       <Toaster/>
     </div>

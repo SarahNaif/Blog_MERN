@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import images from "../data/images";
+import stables from "../data/stables";
 
 const SuggestedPosts = ({ className, header, posts = [], tags }) => {
   return (
@@ -16,16 +18,24 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
             className="flex space-x-3 flex-nowrap items-center"
           >
             <img
-              className="aspect-square object-cover rounded-lg w-3/5 h-2/5"
-              src={item.image[0]}
-              alt="laptop"
+              className="aspect-square object-cover rounded-lg w-2/5"
+              src={
+                item?.photo
+                  ? stables.UPLOAD_FOLDER_BASE_URL + item?.photo
+                  : images.SamplePostImage
+              }
+              alt={item.title}
             />
             <div className="text-sm font-roboto text-dark-hard font-medium">
               <h3 className="text-sm font-roboto text-dark-hard font-medium md:text-base lg:text-lg">
-                {item.title.substr(0,30)+" "}
+              <Link to={`/post/${item.slug}`}> {item.title.substr(0,30)+" "}</Link>
               </h3>
               <span className="text-xs opacity-60">
-              {item.date}
+              {new Date(item.createdAt).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
               </span>
             </div>
           </div>
@@ -34,6 +44,11 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
       <h2 className="font-roboto font-medium text-dark-hard mt-8 md:text-xl">
         Tags
       </h2>
+      {tags.length === 0 ? (
+        <p className="text-slate-500 text-xs mt-2">
+          There is not tags for this post
+        </p>
+      ) : (
       <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
         {tags.map((item, index) => (
           <Link
@@ -45,6 +60,7 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
           </Link>
         ))}
       </div>
+ )}
     </div>
   );
 };
