@@ -25,13 +25,13 @@ const createPost = async (req, res, next) => {
       next(error);
     }
   };
-
+// update/:id
   const updatePost = async (req, res, next) => {
     try {
       const post = await Post.findOne({ slug: req.params.slug });
   
       if (!post) {
-        const error = new Error("Post aws not found");
+        const error = new Error("Post was not found");
         next(error);
         return;
       }
@@ -135,18 +135,43 @@ const createPost = async (req, res, next) => {
 
   const getAllPosts = async (req, res, next) => {
     try {
-      const posts = await Post.find({}).populate([
+      const filter = req.query.searchKeyword;
+      let where = {};
+      if (filter) {
+        where.title = { $regex: filter, $options: "i" };
+      }
+      let query = Post.find(where);
+      const page = parseInt(req.query.page) || 1;
+      const pageSize = parseInt(req.query.limit) || 10;
+      const skip = (page - 1) * pageSize;
+      const total = await Post.find(where).countDocuments();
+      const pages = Math.ceil(total / pageSize);
+
+      res.header({
+        "x-filter": filter,
+        "x-totalcount": JSON.stringify(total),
+        "x-currentpage": JSON.stringify(page),
+        "x-pagesize": JSON.stringify(pageSize),
+        "x-totalpagecount": JSON.stringify(pages),
+      });
+
+      if (page > pages) {
+        return res.json([]);
+      }
+
+  
+      const result = await query
+      .skip(skip)
+      .limit(pageSize)
+      .populate([
         {
           path: "user",
           select: ["avatar", "name", "verified"],
         },
-      ]);
-      if (!posts) {
-        const error = new Error("no posts found");
-        return next(error);
-      }
-  
-      res.json(posts);
+      ])
+      .sort({ updatedAt: "desc" });
+
+    return res.json(result);
     } catch (error) {
       next(error);
     }
