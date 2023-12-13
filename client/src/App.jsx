@@ -11,10 +11,14 @@ import ResetEmail from "./pages/Auth/ResetEmail";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import CreateArticlePage from "./pages/Articles/CreateArticlePage";
 import ForgetPass from "./pages/Auth/ForgetPass";
-
+import AdminLayout from "./pages/admin/AdminLayout";
+import Admin from "./pages/admin/Admin"
+import ManagePosts from "./pages/admin/sections/posts/ManagePosts"
+import NewPost from "./pages/admin/sections/posts/NewPost"
+import DashComments from "./pages/admin/sections/comments/DashComments"
 function App() {
   return (
-    <div className="font-work">
+    <div className="font-work font-opensans">
       <Routes>
         <Route index path="/" element={<HomePage />} />
 
@@ -29,6 +33,14 @@ function App() {
         
 
         <Route path="/profile" element={<ProfilePage/>} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Admin/>} />
+          <Route path="comments" element={<DashComments />} />
+          <Route path="posts/new" element={<NewPost />} />
+          <Route path="posts/manage" element={<ManagePosts />} />
+        </Route>
+
         <Route path="/new" element={<CreateArticlePage/>} />
         <Route path="/post/:slug" element={<ArticleDetailPage />} />
       </Routes>

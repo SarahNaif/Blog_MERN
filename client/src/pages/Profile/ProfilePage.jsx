@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const {
     data: profileData,
     isLoading: profileIsLoading,
-    error: profileError,
   } = useQuery({
     queryFn: () => {
       return getUserProfile({ token: userState.userInfo.token });
@@ -63,10 +62,12 @@ const ProfilePage = () => {
       email: "",
       password: "",
     },
-    values: {
-      name: profileIsLoading ? "" : profileData.name,
-      email: profileIsLoading ? "" : profileData.email,
-    },
+    values: useMemo(()=>{
+return{
+  name: profileIsLoading ? "" : profileData.name,
+  email: profileIsLoading ? "" : profileData.email,
+}
+},[profileData?.email, profileData?.name, profileIsLoading]),    
     mode: "onChange",
   });
 

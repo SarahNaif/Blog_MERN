@@ -77,3 +77,4 @@ export const deleteComment = async ({ token, commentId }) => {
       throw new Error(error.message);
     }
   };
+

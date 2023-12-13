@@ -53,18 +53,27 @@ const Header = () => {
                         profileDrowpdown ? "block" : "hidden"
                       }  transition-all duration-500  absolute bottom-0 right-0 transform translate-y-full group-hover:block w-max`}
                     >
-                      <ul className="bg-dark-soft lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+                      <ul className=" lg:bg-white text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+                      {userState?.userInfo?.admin && (
+                        <button
+                          onClick={() => navigate("/admin")}
+                          type="button"
+                          className=" hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
+                        >
+                          Admin Page
+                        </button>
+                      )}
                         <button
                           onClick={() => navigate("/profile")}
                           type="button"
-                          className="hover:bg-dark-hard hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
+                          className=" hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
                         >
                           Profile Page
                         </button>
                         <button
                           onClick={() => navigate("/new")}
                           type="button"
-                          className="flex gap-2 items-center hover:bg-dark-hard hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
+                          className="flex gap-2 items-center  hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
                         >
                           
                           <HiOutlinePencilAlt />
@@ -73,7 +82,7 @@ const Header = () => {
                         <button
                         onClick={logoutHandler}
                           type="button"
-                          className="flex gap-2 items-center hover:bg-dark-hard hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
+                          className="flex gap-2 items-center  hover:text-[#636363] px-4 py-2 text-[#4B6BFB] lg:text-dark-soft"
                         >
                           <RxExit />
                           Logout
