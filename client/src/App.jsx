@@ -16,11 +16,13 @@ import Admin from "./pages/admin/Admin"
 import ManagePosts from "./pages/admin/sections/posts/ManagePosts"
 import NewPost from "./pages/admin/sections/posts/NewPost"
 import DashComments from "./pages/admin/sections/comments/DashComments"
+import EditPost from "./pages/admin/sections/posts/EditPost";
 function App() {
   return (
     <div className="font-work font-opensans">
       <Routes>
         <Route index path="/" element={<HomePage />} />
+        <Route path="/post/:slug" element={<ArticleDetailPage />} />
 
         <Route path="/user/forget-password" element={<ForgetPass/>} />
         <Route path="/user/reset-password/:resetPasswordToken" element={<ResetEmail/>} />
@@ -42,7 +44,7 @@ function App() {
         </Route>
 
         <Route path="/new" element={<CreateArticlePage/>} />
-        <Route path="/post/:slug" element={<ArticleDetailPage />} />
+       
       </Routes>
       <Toaster/>
     </div>
