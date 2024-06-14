@@ -1,4 +1,4 @@
-import images from "../../data/images";
+import images from "../../constants/images";
 import { NavLink, Link } from "react-router-dom";
 import headerNavLinks from "../../data/headerNavLinks"
 

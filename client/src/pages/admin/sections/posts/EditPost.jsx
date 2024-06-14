@@ -1,8 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { getSinglePost } from "../../../../services/index/posts";
+import { getSinglePost, updatePost } from "../../../../services/index/posts";
 import ArticleDetailSkeleton from "../../../../components/ArticleDetailSkeleton";
 import parseJsonToHtml from "../../../../utils/parseJsonToHtml";
 import Editor from "../../../../components/editor/Editor";
@@ -15,6 +16,7 @@ const EditPost = () => {
 
     const { slug } = useParams();
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
     const userState = useSelector((state) => state.user);
     const [initialPhoto, setInitialPhoto] = useState(null);
     const [photo, setPhoto] = useState(null);
@@ -35,7 +37,7 @@ const EditPost = () => {
             setTitle(data.title);
             setTags(data.tags);
         },
-        // refetchOnWindowFocus: false,
+        refetchOnWindowFocus: false,
     } );
        
 
@@ -62,12 +64,12 @@ const EditPost = () => {
       });
   
 
-    useEffect(()=>{
-      if(!isLoading  && !isError){
-        setInitialPhoto(data?.photo)
-        setBody(parseJsonToHtml(data?.body))
-      }
-    }, [data,isError,isLoading])
+    // useEffect(()=>{
+    //   if(!isLoading  && !isError){
+    //     setInitialPhoto(data?.photo)
+    //     setBody(parseJsonToHtml(data?.body))
+    //   }
+    // }, [data,isError,isLoading])
 
     const handleFileChange = (e) => {
       const file = e.target.files[0];
@@ -253,7 +255,7 @@ const EditPost = () => {
                 />
               )} */}
             </div>
-            <div className="w-full">
+            <div className="w-full mt-5 mb-5 border border-slate-300 rounded-lg  sticky top-3 left-0 right-0 bg-white z-10 flex gap-0.5 flex-wrap">
               {isPostDataLoaded && (
                 <Editor
                   content={data?.body}

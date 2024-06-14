@@ -1,16 +1,16 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import "highlight.js/styles/atom-one-dark.css";
 import MenuBar from "./MenuBar";
-import { tiptapExtensions } from "../../constants/tiptapExtensions";
+import { extensions } from "../../constants/tiptapExtensions";
 
 const Editor = ({ onDataChange, content, editable }) => {
   const editor = useEditor({
     editable,
-    extensions: tiptapExtensions,
+    extensions: extensions,
     editorProps: {
       attributes: {
         class:
-          "!prose !dark:prose-invert prose-sm sm:prose-base max-w-none mt-7 focus:outline-none prose-pre:bg-[#282c34] prose-pre:text-[#abb2bf]",
+          " pl-3 p-3 max-w-none  focus:outline-none ",
       },
     },
     onUpdate: ({ editor }) => {

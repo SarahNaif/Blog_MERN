@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import images from "../data/images";
-import stables from "../data/stables";
+import images from "../constants/images";
+import stables from "../constants/stables";
 
 const SuggestedPosts = ({ className, header, posts = [], tags }) => {
   return (

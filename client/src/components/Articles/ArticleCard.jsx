@@ -2,8 +2,8 @@ import React from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import {Link} from "react-router-dom"
-import stables from "../../data/stables"
-import  images  from "../../data/images";
+import stables from "../../constants/stables"
+import  images  from "../../constants/images";
 
 const ArticleCard = ({ className, item }) => {
   

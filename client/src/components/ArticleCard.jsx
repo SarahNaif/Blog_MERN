@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import  images  from "../data/images";
+import  images  from "../constantsimages";
 
 const ArticleCard = ({ className, item }) => {
   return (

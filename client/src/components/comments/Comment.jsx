@@ -1,8 +1,8 @@
 import React from "react";
 import { FiMessageSquare, FiEdit2, FiTrash } from "react-icons/fi";
 
-import  images  from "../../data/images";
-import stables from "../../data/stables"
+import  images  from "../../constants/images";
+import stables from "../../constants/stables"
 import CommentForm from "./CommentForm";
 
 const Comment = ({

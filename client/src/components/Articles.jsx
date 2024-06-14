@@ -1,6 +1,6 @@
 import {useState}from 'react'
 import ArticleCard from './ArticleCard'
-import articleData from '../data/articlesdata'
+import articleData from '../constants/articlesdata'
 
 
 

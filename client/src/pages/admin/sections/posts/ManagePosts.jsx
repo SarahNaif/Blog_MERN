@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import images from "../../../../data/images"
-import stables from "../../../../data/stables"
+import { Link } from "react-router-dom";
+import images from "../../../../constants/images"
+import stables from "../../../../constants/stables"
 import { getAllPosts , deletePost} from "../../../../services/index/posts";
 import Pagination from "../../../../components/Pagination";
 const ManagePosts = () => {
@@ -206,9 +207,9 @@ const ManagePosts = () => {
                       >
                         <HiOutlineTrash className="h-7 w-6 stroke-red-500 " />
                       </button>
-                      <button x-data="{ tooltip: 'Delete' }" href="#">
+                      <Link to={`/admin/posts/manage/edit/${post?.slug}`}>
                         <HiOutlinePencil className="h-7 w-6 stroke-yellow-500" />
-                      </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>

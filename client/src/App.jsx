@@ -41,6 +41,7 @@ function App() {
           <Route path="comments" element={<DashComments />} />
           <Route path="posts/new" element={<NewPost />} />
           <Route path="posts/manage" element={<ManagePosts />} />
+          <Route path="posts/manage/edit/:slug" element={<EditPost />} />
         </Route>
 
         <Route path="/new" element={<CreateArticlePage/>} />

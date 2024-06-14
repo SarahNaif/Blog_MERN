@@ -1,20 +1,17 @@
 import React , {useState}from 'react'
 import { useQuery } from "@tanstack/react-query";
 import MainLayout from "../../components/navigation/MainLayout"
-import images from '../../data/images'
+import images from '../../constants/images'
 import { Link, useParams } from 'react-router-dom'
 import BreadCrumbs from '../../components/BreadCrumbs'
-import breadCrumbsData from '../../data/breadCrumbsData'
 import SuggestedPosts from '../../components/SuggestedPosts'
-import articleData from '../../data/articlesdata'
-import  tagsData  from '../../data/tags'
 import SocialShareButtons from '../../components/SocialShareButtons'
 import CommentsContainer from '../../components/comments/CommentsContainer'
 import { useSelector } from 'react-redux'
 import {getSinglePost, getAllPosts} from "../../services/index/posts"
 import ArticleDetailSkeleton from "../../components/ArticleDetailSkeleton"
 import ErrorMessaage from "../../components/ErrorMessage"
-import stables from "../../data/stables"
+import stables from "../../constants/stables"
 import { generateHTML } from '@tiptap/html'
 import Bold from "@tiptap/extension-bold";
 import Document from "@tiptap/extension-document";

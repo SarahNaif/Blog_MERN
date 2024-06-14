@@ -13,10 +13,10 @@ import html from "highlight.js/lib/languages/xml";
 
 lowlight.registerLanguage("html", html);
 lowlight.registerLanguage("css", css);
-lowlight.registerLanguage('javascript', js);
-lowlight.registerLanguage('typescript', ts);
+lowlight.registerLanguage("js", js);
+lowlight.registerLanguage("ts", ts);
 
-const tiptapExtensions = [
+export const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
   TextStyle.configure({ types: [ListItem.name] }),
   StarterKit.configure({
@@ -29,9 +29,9 @@ const tiptapExtensions = [
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
   }),
-,
+  CodeBlockLowlight.configure({
+    lowlight,
+  }),
   Dropcursor,
   Image,
 ];
-
-export {tiptapExtensions}

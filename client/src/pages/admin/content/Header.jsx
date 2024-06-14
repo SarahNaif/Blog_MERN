@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useWindowSize } from "@uidotdev/usehooks";
 
-import  images  from "../../../data/images";
+import  images  from "../../../constants/images";
 import { useEffect, useState } from "react";
 import { AiFillDashboard, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";

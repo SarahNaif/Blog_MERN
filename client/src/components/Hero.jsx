@@ -1,4 +1,4 @@
-import images from "../data/images"
+import images from "../constants/images"
 
 const Hero = () => {
   return (
