@@ -3,7 +3,7 @@ import HeroImage from "../assets/HeroImage.svg"
 import PostProfileImage from "../assets/PostProfileImage.jpg"
 import SamplePostImage from "../assets/SamplePostImage.jpg"
 
-const images = {
+export const images = {
     Logo,
     HeroImage,
     PostProfileImage,

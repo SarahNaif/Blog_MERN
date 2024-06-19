@@ -46,10 +46,10 @@ const Pagination = ({
             </svg>
         </button>
 
-        {paginationRange.map((pageNumber) => {
+        {paginationRange.map((pageNumber, index) => {
           if (pageNumber === DOTS) {
             return (
-        <button type="button" className="w-full px-4 py-2 text-base text-indigo-500 bg-white border-t border-b hover:bg-gray-100 ">
+        <button key={index} type="button" className="w-full px-4 py-2 text-base text-indigo-500 bg-white border-t border-b hover:bg-gray-100 ">
             ---
         </button>
             )

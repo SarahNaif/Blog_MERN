@@ -39,17 +39,19 @@ const createPost = async (req, res, next) => {
       const upload = uploadPicture.single("postPicture");
   
       const handleUpdatePostData = async (data) => {
-        console.log("error here" + data)
-        const { title, caption, slug, body, tags, categories } = JSON.parse(data);
-        post.title = title || post.title;
-        post.caption = caption || post.caption;
-        post.slug = slug || post.slug;
-        post.body = body || post.body;
-        post.tags = tags || post.tags;
-        post.categories = categories || post.categories;
-        const updatedPost = await post.save();
-        return res.json(updatedPost);
-      };
+try{
+  const { title, caption, slug, body, tags, categories } = JSON.parse(data);
+  post.title = title || post.title;
+  post.caption = caption || post.caption;
+  post.slug = slug || post.slug;
+  post.body = body || post.body;
+  post.tags = tags || post.tags;
+  post.categories = categories || post.categories;
+  const updatedPost = await post.save();
+  return res.json(updatedPost);
+} catch(error){
+  next(new Error('An unexpected error occurred: ' + error.message));
+}};
   
       upload(req, res, async function (err) {
         if (err) {

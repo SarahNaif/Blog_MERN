@@ -4,7 +4,7 @@ import headerNavLinks from "../../data/headerNavLinks";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RxExit } from "react-icons/rx";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-import images from "../../data/images";
+import images from "../../constants/images";
 import MobileNav from "./MobileNav";
 import { useSelector, useDispatch } from "react-redux";
 

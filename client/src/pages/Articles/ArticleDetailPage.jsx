@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React , {useState, useEffect}from 'react'
 import { useQuery } from "@tanstack/react-query";
 import MainLayout from "../../components/navigation/MainLayout"
 import images from '../../constants/images'
@@ -12,13 +12,9 @@ import {getSinglePost, getAllPosts} from "../../services/index/posts"
 import ArticleDetailSkeleton from "../../components/ArticleDetailSkeleton"
 import ErrorMessaage from "../../components/ErrorMessage"
 import stables from "../../constants/stables"
-import { generateHTML } from '@tiptap/html'
-import Bold from "@tiptap/extension-bold";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Italic from "@tiptap/extension-italic";
-import parse from "html-react-parser";
+import parseJsonToHtml from "../../utils/parseJsonToHtml"
+import Editor from '../../components/editor/Editor';
+
 
 const ArticleDetailPage = () => {
   const {slug} = useParams();
@@ -30,18 +26,18 @@ const ArticleDetailPage = () => {
     queryFn: () => getSinglePost({ slug }),
     queryKey: ["blog", slug],
     onSuccess: (data) => {
+   
       setbreadCrumbsData([
         { name: "Home", link: "/" },
         { name: "Blog", link: "/blog" },
         { name: `${data.title.substring(0,41)}`, link: `/blog/${data.slug}` },
       ]);
-      setBody(
-        parse(
-          generateHTML(data?.body, [Bold, Italic, Text, Paragraph, Document])
-        )
-      );
-    },onError:()=>{
-      
+      setBody(parseJsonToHtml(data?.body));
+     
+    },onError:(error)=>{
+      toast.error(error.message);
+      console.log(error);
+      console.log(data?.body)
     }
   });
 
@@ -51,6 +47,9 @@ const ArticleDetailPage = () => {
   });
 
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <MainLayout>
@@ -84,9 +83,11 @@ const ArticleDetailPage = () => {
         {data?.title}
         </h1>
         <div className="mt-4 text-dark-soft">
-          <div className="leading-7">
-            {body}
-          </div>
+        <div className="w-full">
+              {!isLoading && !isError && (
+                <Editor content={data?.body} editable={false} />
+              )}
+            </div>
         </div>
         <CommentsContainer 
         className="mt-10" 
