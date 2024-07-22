@@ -1,8 +1,14 @@
 import axios from "axios";
 
-export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
+export const getAllCategories = async (
+  searchKeyword = "",
+  page = 1,
+  limit = 10
+) => {
   try {
-    const { data, headers } = await axios.get(`/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`);
+    const { data, headers } = await axios.get(
+      `/api/categories?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+    );
     return { data, headers };
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -11,9 +17,15 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   }
 };
 
-export const getSinglePost = async ({ slug }) => {
+export const deleteCategory = async ({ slug, token }) => {
   try {
-    const { data } = await axios.get(`/api/posts/${slug}`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`/api/categories/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -22,7 +34,7 @@ export const getSinglePost = async ({ slug }) => {
   }
 };
 
-export const deletePost = async ({ slug, token }) => {
+export const createCategory = async ({ token, title }) => {
   try {
     const config = {
       headers: {
@@ -30,7 +42,11 @@ export const deletePost = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/posts/${slug}`, config);
+    const { data } = await axios.post(
+      `/api/categories`,
+      { title },
+      config
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -39,7 +55,7 @@ export const deletePost = async ({ slug, token }) => {
   }
 };
 
-export const updatePost = async ({ updatedData, slug, token }) => {
+export const updateCategory = async ({ token, title, slug }) => {
   try {
     const config = {
       headers: {
@@ -47,7 +63,11 @@ export const updatePost = async ({ updatedData, slug, token }) => {
       },
     };
 
-    const { data } = await axios.put(`/api/posts/${slug}`, updatedData, config);
+    const { data } = await axios.put(
+      `/api/categories/${slug}`,
+      { title },
+      config
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -56,16 +76,9 @@ export const updatePost = async ({ updatedData, slug, token }) => {
   }
 };
 
-// create
-export const createPost = async ({ token }) => {
+export const getSingleCategory = async ({ slug }) => {
   try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const { data } = await axios.post(`/api/posts`, {}, config);
+    const { data } = await axios.get(`/api/post-categories/${slug}`);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

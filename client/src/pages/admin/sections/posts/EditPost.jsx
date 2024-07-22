@@ -10,7 +10,9 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { stables } from '../../../../constants/stables';
-
+import MultiSelectTagDropdown from "../../content/drop-down/MultiSelectTagDropdown"
+import { getAllCategories } from "../../../../services/index/postCategories";
+import { categoryToOption, filterCategories} from "../../../../utils/multiSelectTagUtils";
 const EditPost = () => {
 
     const { slug } = useParams();
@@ -26,7 +28,10 @@ const EditPost = () => {
     const [postSlug, setPostSlug] = useState(slug);
     const [caption, setCaption] = useState("");
 
-
+    const promiseOptions = async (inputValue) => {
+      const { data: categoriesData } = await getAllCategories();
+      return filterCategories(inputValue, categoriesData);
+    };
     const { data, isLoading, isError } = useQuery({
         queryFn: () => getSinglePost({ slug }),
         queryKey: ["blog", slug],
@@ -63,12 +68,7 @@ const EditPost = () => {
       });
   
 
-    // useEffect(()=>{
-    //   if(!isLoading  && !isError){
-    //     setInitialPhoto(data?.photo)
-    //     setBody(parseJsonToHtml(data?.body))
-    //   }
-    // }, [data,isError,isLoading])
+   
 
     const handleFileChange = (e) => {
       const file = e.target.files[0];
@@ -124,7 +124,7 @@ const EditPost = () => {
       ) : isError ? (
         <ErrorMessage message="Couldn't fetch the post edit" />
       ) : (
-        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start bg-white">
+        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start bg-white mb-14">
           <article className="flex-1">
             <label htmlFor="postPicture" className="w-full cursor-pointer">
               {photo ? (
@@ -226,7 +226,7 @@ const EditPost = () => {
               <label className="d-label">
                 <span className="d-label-text">Categories</span>
               </label>
-              {/* {isPostDataLoaded && (
+              {isPostDataLoaded && (
                 <MultiSelectTagDropdown
                   loadOptions={promiseOptions}
                   defaultValue={data.categories.map(categoryToOption)}
@@ -234,9 +234,9 @@ const EditPost = () => {
                     setCategories(newValue.map((item) => item.value))
                   }
                 />
-              )} */}
+              )}
             </div>
-            <div className="mb-5 mt-2">
+            {/* <div className="mb-5 mt-2">
               <label className="d-label">
                 <span className="d-label-text">Tags</span>
               </label>
@@ -252,8 +252,8 @@ const EditPost = () => {
                   }
                   className="relative z-20"
                 />
-              )} */}
-            </div>
+              )} 
+            </div> */}
             <div className="w-full mt-5 mb-5 border border-slate-300 rounded-lg  sticky top-3 left-0 right-0 bg-white z-10 flex gap-0.5 flex-wrap">
               {isPostDataLoaded && (
                 <Editor

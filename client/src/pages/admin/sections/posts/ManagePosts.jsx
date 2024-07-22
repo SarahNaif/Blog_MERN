@@ -162,11 +162,20 @@ const ManagePosts = () => {
                     </div>
                   </th>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex whitespace-no-wrap items-center gap-1 rounded-full  px-2 py-1 text-xs font-semibold   ${post.categories.length > 0 ? `text-green-600 bg-green-50`: `text-slate-800 bg-gray-100`}`}>
-                      <span className={`h-1.5 w-1.5 rounded-full  ${post.categories.length > 0 ? `bg-green-600`: `bg-gray-600`}`}></span>
-                            {post.categories.length > 0
-                              ? post.categories[0]
-                              : "Uncategorized"}
+                    <span className={`inline-flex whitespace-no-wrap items-center gap-1 rounded-full  px-2 py-1 text-xs font-semibold   ${ post.categories.length > 0 ? `text-green-600 bg-green-50`: `text-slate-800 bg-gray-100`}`}>
+                      <span className={`h-1.5 w-1.5 rounded-full  ${ post.categories.length > 0 ? `bg-green-600`: `bg-gray-600`}`}></span>
+                            { post.categories.length > 0
+                             ? post.categories
+                             .slice(0, 3)
+                             .map(
+                               (category, index) =>
+                                 `${category.title}${
+                                   post.categories.slice(0, 3).length === index + 1
+                                     ? ""
+                                     : ", "
+                                 }`
+                             )
+                         : "Uncategorized"}
                           
                     </span>
                   </td>
@@ -180,7 +189,7 @@ const ManagePosts = () => {
                             )}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
-                      <span>
+                      {/* <span>
                       {post.tags.length > 0
                               ? post.tags.map((tag, index) => (
                                   <p key={index} className={`inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 m-1 text-xs font-semibold ${post.tags.length > 0 ? `text-blue-600 bg-blue-50`: `text-slate-800 bg-gray-100` } `}>
@@ -189,7 +198,7 @@ const ManagePosts = () => {
                                   </p>
                                 ))
                               : "No tags"}
-                      </span>
+                      </span> */}
                     </div>
                   </td>
                   <td className="px-6 py-4">

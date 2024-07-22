@@ -17,6 +17,7 @@ import ManagePosts from "./pages/admin/sections/posts/ManagePosts"
 import NewPost from "./pages/admin/sections/posts/NewPost"
 import DashComments from "./pages/admin/sections/comments/DashComments"
 import EditPost from "./pages/admin/sections/posts/EditPost";
+import Categories from "./pages/admin/sections/categories/Categories";
 function App() {
   return (
     <div className="font-work font-opensans">
@@ -41,6 +42,7 @@ function App() {
           <Route path="comments" element={<DashComments />} />
           <Route path="posts/new" element={<NewPost />} />
           <Route path="posts/manage" element={<ManagePosts />} />
+          <Route path="categories/manage" element={<Categories />} />
           <Route path="posts/manage/edit/:slug" element={<EditPost />} />
         </Route>
 

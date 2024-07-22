@@ -11,8 +11,8 @@ import NavItemCollapse from "./NavItemCollapse";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-// import { createPost } from "../../../../services/index/posts";
-import { images} from "../../../constants/images"
+import { createPost } from "../../../../services/index/posts";
+import { images} from "../../../../constants/images"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -112,14 +112,15 @@ const Header = () => {
               >
                 <Link to="/admin/posts/manage">Manage all posts</Link>
                 <button
-                  // disabled={isLoadingCreatePost}
+                  disabled={isLoadingCreatePost}
                   className="text-start disabled:opacity-60 disabled:cursor-not-allowed"
-                  // onClick={() =>
-                  //   handleCreateNewPost({ token: userState.userInfo.token })
-                  // }
+                  onClick={() =>
+                    handleCreateNewPost({ token: userState.userInfo.token })
+                  }
                 >
                   Add New Post
                 </button>
+                
                 <Link to="/admin/categories/manage">Categories</Link>
               </NavItemCollapse>
 
